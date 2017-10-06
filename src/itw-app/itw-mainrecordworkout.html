@@ -1,0 +1,190 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+
+<dom-module id="itw-mainrecordworkout">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+			paper-input {
+				max-width: 230px;
+			}
+		</style>
+
+		<firebase-query
+			id="query"
+			path="/workouts">
+		</firebase-query>
+
+		<h2>Record Workout</h2>
+
+		<h3>Workout Type</h3>
+
+		<br>
+
+		<paper-dropdown-menu id="workout" label="Select: ">
+			<paper-listbox id="selected" selected="{{selected}}" slot="dropdown-content" selected="0">
+				<paper-item>-select-</paper-item>
+				<paper-item>Pushups</paper-item>
+				<paper-item>Stretching</paper-item>
+				<paper-item>Squats</paper-item>
+				<paper-item>Situps</paper-item>
+				<paper-item>Running</paper-item>
+			</paper-listbox>
+		</paper-dropdown-menu>
+
+		<h3>[[textDisplayAmount]]</h3>
+		<paper-input label="total" id="amount" type="number" hidden="[[hideInput]]"></paper-input>
+
+		<br>
+
+		<paper-button on-click="handleClickSubmit" hidden="[[hideInput]]">Submit</paper-button>
+
+		<br>
+		<br>
+
+		<h3>Go Back</h3>
+		<paper-button on-click="handleClick">Back</paper-button>
+
+  </template>
+
+  <script>
+    class ItwMainrecordworkout extends Polymer.Element {
+      static get is() { return 'itw-mainrecordworkout'; }
+
+      static get properties() {
+        return {
+          userName: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          },
+          hideInput: {
+						type: Boolean,
+						value: true,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          },
+          selected: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          },
+          textDisplayAmount: {
+            type: String,
+            reflectToAttribute: true
+          },
+          mainPage: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          },
+          actionText: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+					'_textDisplayAmountChanged(actionText)',
+          'handleChange(selected)'
+        ];
+			}
+
+      _textDisplayAmountChanged(actionText) {
+				if (actionText) {
+					this.textDisplayAmount = 'Enter total amount of ' + actionText + ': ';
+				} else {
+					this.textDisplayAmount = '';
+				}
+      }
+
+      handleClick() {
+				this.mainPage = 'maindefault';
+      }
+
+      handleClickSubmit() {
+				var workout = this.$.workout.value;
+				if (workout == '-select-') {
+					alert('You must select a workout.');
+				} else {
+					if (this.$.amount.value) {
+						var value = this.$.amount.value;
+						if (isNaN(value)) {
+							alert('Value is not a number.');
+						} else {
+							this._submitData(value, workout);
+						}
+					} else {
+						alert('You must select an amount for your workout.');
+					}
+				}
+			}
+
+			_submitData(value, workout) {
+				var d = new Date();
+				var recordedOn = d.getFullYear() + '-' + d.getDate() + '-' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes();
+
+        this.$.query.ref.push({
+          name: this.userName,
+          workout: workout,
+          amount: value,
+          recordedOn: recordedOn
+				});
+        this.$.amount.value = '';
+				this.mainPage = 'maindefault';
+			}
+
+      handleChange() {
+				var options = [ { 'id': 0, 'text': '-select-'}, { 'id': 1, 'text': 'Pushups'}, { 'id': 2, 'text': 'Stretching'},
+												{ 'id': 3, 'text': 'Squats'}, { 'id': 4, 'text': 'Situps'}, { 'id': 5, 'text': 'Running'}]
+				var selectedItem = options[this.selected].text;
+
+				switch(selectedItem) {
+					case 'Pushups':
+						this.hideInput = false;
+						this.actionText = ' pushups you did';
+						break;
+					case 'Stretching':
+						this.hideInput = false;
+						this.actionText = ' minutes of streaching you did';
+						break;
+					case 'Squats':
+						this.hideInput = false;
+						this.actionText = ' squats you did';
+						break;
+					case 'Situps':
+						this.hideInput = false;
+						this.actionText = ' situps you did';
+						break;
+					case 'Running':
+						this.hideInput = false;
+						this.actionText = ' laps you ran around the ImageTrend building';
+						break;
+					default:
+						this.hideInput = true;
+						this.actionText = '';
+				}
+      }
+    }
+
+    window.customElements.define(ItwMainrecordworkout.is, ItwMainrecordworkout);
+  </script>
+</dom-module>

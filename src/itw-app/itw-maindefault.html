@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="itw-maindefault">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+		<h2>Your Stats</h2>
+		<paper-button on-click="handleClickYourStats">Go</paper-button>
+		<br><br>
+
+		<h2>Everyones Stats</h2>
+		<paper-button on-click="handleClickEveryonesStats">Go</paper-button>
+		<br><br>
+
+		<h2>Record Workout</h2>
+		<paper-button on-click="handleClickRecordWorkout">Go</paper-button>
+		<br><br>
+
+		<h2>Logout</h2>
+		<paper-button on-click="handleClickLogout">Logout</paper-button>
+		<br><br>
+
+  </template>
+
+  <script>
+    class ItwMaindefault extends Polymer.Element {
+			static get is() { return 'itw-maindefault'; }
+      static get properties() {
+        return {
+          userName: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          },
+          mainPage: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          }
+        };
+      }
+
+      handleClickYourStats() {
+				this.mainPage = 'mainyourstats';
+      }
+
+      handleClickEveryonesStats() {
+				this.mainPage = 'maineveryonesstats';
+      }
+
+      handleClickRecordWorkout() {
+				this.mainPage = 'mainrecordworkout';
+      }
+
+      handleClickLogout() {
+				this.userName = '';
+      }
+		}
+    window.customElements.define(ItwMaindefault.is, ItwMaindefault);
+  </script>
+</dom-module>
+

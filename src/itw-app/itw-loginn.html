@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="itw-loginn">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+		<h2>Loginn As:</h2>
+		[[userName]]
+
+		<paper-dropdown-menu id="person" label="Select: ">
+			<paper-listbox slot="dropdown-content" selected="0">
+				<paper-item>-select-</paper-item><paper-item>Allinder, Matt</paper-item><paper-item>Almquist, Kaydene</paper-item><paper-item>Anderson, Breanna</paper-item><paper-item>Anderson, Morgan</paper-item><paper-item>Anderson, Ryan</paper-item><paper-item>Anderson, Sandy</paper-item><paper-item>Anderson, Steve</paper-item><paper-item>Awe, Devin</paper-item><paper-item>Bachmeier, Adam</paper-item><paper-item>Baker, Jessica</paper-item><paper-item>Bambard, Eric</paper-item><paper-item>Beumer, Cody</paper-item><paper-item>Black, Cori</paper-item><paper-item>Bohl, Becca</paper-item><paper-item>Bonham, Jason</paper-item><paper-item>Bridley, Bryn</paper-item><paper-item>Canfield, Alex</paper-item><paper-item>Cannon, Hallie</paper-item><paper-item>Cappitelli, Phil</paper-item><paper-item>Cappitelli, Tammy</paper-item><paper-item>Carlson, Mari Laine</paper-item><paper-item>Carlson, Traci</paper-item><paper-item>Carrizales, Joel</paper-item><paper-item>Cavanaugh, PJ</paper-item><paper-item>Clarke, Kelly</paper-item><paper-item>Devney, John</paper-item><paper-item>Diekmann, Duston</paper-item><paper-item>Dillard, Justin</paper-item><paper-item>Dockter, Christen</paper-item><paper-item>Driscoll, Mike</paper-item><paper-item>Duerr, Kelli</paper-item><paper-item>Eidsness, Randy</paper-item><paper-item>Eisenzimmer, Kyle</paper-item><paper-item>Escher, Chris</paper-item><paper-item>Faux, Peter</paper-item><paper-item>Fellows, Henry</paper-item><paper-item>Ferriby, Kevin</paper-item><paper-item>Fink, Kevin</paper-item><paper-item>Fobes, Brandon</paper-item><paper-item>Freking, Jenaye</paper-item><paper-item>Gates, Jen</paper-item><paper-item>Gazzano, Craig</paper-item><paper-item>Gibbs, Ian</paper-item><paper-item>Giese, Samantha</paper-item><paper-item>Gluesing, Jordan</paper-item><paper-item>Graw, Joe</paper-item><paper-item>Graw, Tara</paper-item><paper-item>Haggerty, David</paper-item><paper-item>Hall, Joe</paper-item><paper-item>Hansen, Lili</paper-item><paper-item>Hansohn, Chris</paper-item><paper-item>Hanson, Peter</paper-item><paper-item>Hauser, Summer</paper-item><paper-item>Heaser, Jacob</paper-item><paper-item>Henderson, Jeremy</paper-item><paper-item>Hennen, Joannie</paper-item><paper-item>Hipple, Drew</paper-item><paper-item>Hollensteiner, Steven</paper-item><paper-item>Holmes, Amy</paper-item><paper-item>Hovda, Cathy</paper-item><paper-item>Hulsether, Anne</paper-item><paper-item>Hulsether, Nick</paper-item><paper-item>Hultman, Ted</paper-item><paper-item>Johnsen, Madeline</paper-item><paper-item>Johnson, Andrew</paper-item><paper-item>Johnson, Jeff</paper-item><paper-item>Johnson, Victor</paper-item><paper-item>Johnston, Tyler</paper-item><paper-item>Julik, Joseph</paper-item><paper-item>Katzenberger, Jay M.</paper-item><paper-item>Kendall, Jeremy</paper-item><paper-item>Ketcher, Kevin</paper-item><paper-item>Keyport, Alex</paper-item><paper-item>Khan, Kashif M.</paper-item><paper-item>Klancke, Lauryn</paper-item><paper-item>Klingberg, Madeline</paper-item><paper-item>Knutson, Cole</paper-item><paper-item>Knutson, Joshua</paper-item><paper-item>Koistinen, Tori</paper-item><paper-item>Kreger, Seth</paper-item><paper-item>Kruse, Aaron</paper-item><paper-item>Laine, Aaron</paper-item><paper-item>Lalich, Preston</paper-item><paper-item>Lam, Mi</paper-item><paper-item>Lamb, David</paper-item><paper-item>Larsen, David</paper-item><paper-item>Larsen, Peter</paper-item><paper-item>Ledeboer, Amanda</paper-item><paper-item>Ledeboer, Erik</paper-item><paper-item>Leean, Janet</paper-item><paper-item>Leonard, Robin</paper-item><paper-item>Lewis, Sheldon</paper-item><paper-item>Li, Rachel</paper-item><paper-item>Lindquist, Adam</paper-item><paper-item>Lindquist, Joshua</paper-item><paper-item>Marquardt, Paul</paper-item><paper-item>Marta, Joe</paper-item><paper-item>Mauland, Derek</paper-item><paper-item>McBrady, Amanda</paper-item><paper-item>McBrady, Collin</paper-item><paper-item>McBrady, Michael</paper-item><paper-item>McBrady, Valerie</paper-item><paper-item>McDonagh, Nicholas</paper-item><paper-item>Medved, Amy</paper-item><paper-item>Melby, Amy</paper-item><paper-item>Moening, Jacob</paper-item><paper-item>Morey, Jack</paper-item><paper-item>Morey, Megan</paper-item><paper-item>Morris, Chris</paper-item><paper-item>Musselman, Jordan</paper-item><paper-item>Newman, Matthew</paper-item><paper-item>Nielsen, Jacqueline</paper-item><paper-item>Noll, DawnRenee</paper-item><paper-item>Norby, Chris</paper-item><paper-item>Novak, Rob</paper-item><paper-item>Nuñez, Adan</paper-item><paper-item>Olson, Kyle</paper-item><paper-item>Olson, Neil</paper-item><paper-item>Owen, Beverly</paper-item><paper-item>Ozanne, Sarah</paper-item><paper-item>Pagel, David</paper-item><paper-item>Patock, Michael</paper-item><paper-item>Pearson, Josh</paper-item><paper-item>Pihlaja, Joshua</paper-item><paper-item>Pithan, Kelly</paper-item><paper-item>Pittman, Andrew</paper-item><paper-item>Pompa, Colleen</paper-item><paper-item>Poudyal, Prabesh</paper-item><paper-item>Poynter, Christian</paper-item><paper-item>Priebe, Rick</paper-item><paper-item>Rauf, Furqan</paper-item><paper-item>Rees, Craig</paper-item><paper-item>Regier, Nick</paper-item><paper-item>Rice, Dean</paper-item><paper-item>Riesterer, Christoph F.</paper-item><paper-item>Ritt, Toby</paper-item><paper-item>Robinson, Joe</paper-item><paper-item>Rye, Matt</paper-item><paper-item>Sawyer, Eric</paper-item><paper-item>Schirer, Laura</paper-item><paper-item>Schroeder, Charlie</paper-item><paper-item>Schweigert, Nate</paper-item><paper-item>Seurer, Tyler</paper-item><paper-item>Shenouda, John</paper-item><paper-item>Shrestha, Ashirwad</paper-item><paper-item>Silva, Chris</paper-item><paper-item>Simon, Joe</paper-item><paper-item>Simonson, Tyler</paper-item><paper-item>Singh, Rahul</paper-item><paper-item>Skelly, Chris</paper-item><paper-item>Sommers, Andria F.</paper-item><paper-item>Spears, Lynn</paper-item><paper-item>Spring, Nick</paper-item><paper-item>Stanton, Tiffany</paper-item><paper-item>Stark, Michon</paper-item><paper-item>Stein, Elliot</paper-item><paper-item>Swanson, Chelsey</paper-item><paper-item>System, Administrator</paper-item><paper-item>Tamasi, Mike</paper-item><paper-item>Throne, JasonTornio, Alyssa</paper-item><paper-item>Tuma, Brett</paper-item><paper-item>Tushie-Lessard, Alex</paper-item><paper-item>Valek, Jennifer</paper-item><paper-item>Vanek, Zachary</paper-item><paper-item>Vanina, Lisa</paper-item><paper-item>Vanorny, Dan</paper-item><paper-item>Viet, Jeremy</paper-item><paper-item>Vikander, Ryan</paper-item><paper-item>Vogl, Sarah</paper-item><paper-item>von Zeller, Lauren</paper-item><paper-item>Wade, Jayson</paper-item><paper-item>Wade, Michael</paper-item><paper-item>Waithanji, Isaac</paper-item><paper-item>Wallenfelt, Jeff</paper-item><paper-item>Wheaton, Joseph</paper-item><paper-item>Whelan, Katie</paper-item><paper-item>Whipple, Troy</paper-item><paper-item>Wilkie, Jen</paper-item><paper-item>Williams, Tricia</paper-item><paper-item>Wilson, Daniel</paper-item><paper-item>Wimmer, Kristine</paper-item><paper-item>Winter, Josh</paper-item><paper-item>Worley, Mary</paper-item><paper-item>York, Todd</paper-item><paper-item>Zaiman, David</paper-item><paper-item>Zhou, Jerry<paper-item>
+			</paper-listbox>
+		</paper-dropdown-menu>
+
+		<paper-button on-click="handleClick">Go</paper-button>
+
+  </template>
+
+  <script>
+    class ItwLoginn extends Polymer.Element {
+			static get is() { return 'itw-loginn'; }
+
+      static get properties() {
+        return {
+          userName: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          }
+        };
+      }
+
+      handleClick() {
+				if (this.$.person.value == '-select-') {
+					alert('You must select a user');
+				} else {
+					this.userName = this.$.person.value;
+				}
+      }
+		}
+
+    window.customElements.define(ItwLoginn.is, ItwLoginn);
+  </script>
+</dom-module>

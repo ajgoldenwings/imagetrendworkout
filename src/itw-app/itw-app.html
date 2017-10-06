@@ -1,0 +1,118 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+
+<link rel="lazy-import" href="itw-login.html">
+<link rel="lazy-import" href="itw-main.html">
+
+<dom-module id="itw-app">
+  <template>
+			<style>
+				a {
+					text-decoration: none;
+					color: black;
+				}
+			</style>
+
+    <app-location
+        route="{{route}}"
+        url-space-regex="^[[rootPath]]">
+    </app-location>
+
+    <app-route
+        route="{{route}}"
+        pattern="[[rootPath]]:page"
+        data="{{routeData}}"
+        tail="{{subroute}}">
+		</app-route>
+
+		<firebase-app
+			id="firebase"
+			auth-domain="imagetrend-workout.firebaseapp.com"
+			database-url="https://imagetrend-workout.firebaseio.com"
+			api-key="AIzaSyBfGRFqlbYoK8jD5c7koRZ6vQLB-nlFBpQ">
+		</firebase-app>
+
+		<h1><a href="https://github.com/ajgoldenwings/imagetrendworkout" target="_blank">ImageTrend Workout</a></h1>
+		[[loggedInAs]]
+		<hr>
+
+		<iron-pages
+				selected="[[page]]"
+				attr-for-selected="name"
+				role="main">
+			<itw-login name="login" user-name="{{userName}}"></itw-login>
+			<itw-main name="main" user-name="{{userName}}"></itw-main>
+		</iron-pages>
+  </template>
+
+  <script>
+    class MyApp extends Polymer.Element {
+      static get is() { return 'itw-app'; }
+
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged',
+          },
+          loggedInAs: {
+            type: String,
+            reflectToAttribute: true
+          },
+          routeData: Object,
+          subroute: String,
+					rootPath: String,
+          userName: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)',
+          '_loggedInAs(userName)',
+        ];
+			}
+
+      _routePageChanged(page) {
+				var pageDefault = 'login';
+
+				if (this.userName) {
+					pageDefault = 'main';
+				}
+
+        this.page = page || pageDefault;
+      }
+
+      _pageChanged(page) {
+        var resolvedPageUrl = this.resolveUrl('itw-' + page + '.html');
+        Polymer.importHref(
+            resolvedPageUrl,
+            null,
+            null,
+            true);
+      }
+
+      _loggedInAs(userName) {
+				if (userName) {
+					this.page = 'main'
+					this.loggedInAs = 'Logged In As: ' + userName + '!';
+				} else {
+					this.loggedInAs = '';
+					this.page = 'login'
+				}
+      }
+    }
+
+    window.customElements.define(MyApp.is, MyApp);
+  </script>
+</dom-module>
+

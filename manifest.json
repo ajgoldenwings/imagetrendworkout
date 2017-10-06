@@ -1,0 +1,7 @@
+{
+  "name": "ImageTrend Workout",
+  "short_name": "ImageTrend Workout",
+  "description": "This app is used to record your workout.",
+  "start_url": "/",
+  "display": "standalone"
+}

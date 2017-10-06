@@ -1,0 +1,166 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="itw-maineveryonesstats">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+			table {
+				width: 400px;
+			}
+    </style>
+
+		<firebase-query
+			id="query"
+			order-by-child="name"
+			path="/workouts"
+      data="{{workouts}}">
+		</firebase-query>
+
+		<h2>Everyones Stats</h2>
+
+		<h3><iframe src="https://giphy.com/embed/xT9IgJjggN9M3dsqDm" width="60" height="45" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> Pushups</h3>
+		<table>
+			<tr>
+				<td style="border-bottom: 1px solid black;"><b>&middotName&middot</b></td>
+				<td style="border-bottom: 1px solid black;">Amount</td>
+				<td style="border-bottom: 1px solid black;">Date</td>
+			</tr>
+			<template is="dom-repeat" items="[[workouts]]" as="workout" filter="{{isYou(userName,'Pushups')}}">
+				<tr>
+					<td>[[workout.name]]</td>
+					<td>[[workout.amount]]</td>
+					<td>[[workout.recordedOn]]</td>
+				</tr>
+			</template>
+		</table>
+		<br>
+
+		<h3><iframe src="https://giphy.com/embed/26vIeSuigIf0d8Y36" width="45" height="60" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> Stretching</h3>
+		<table>
+			<tr>
+				<td style="border-bottom: 1px solid black;"><b>&middotName&middot</b></td>
+				<td style="border-bottom: 1px solid black;">Amount</td>
+				<td style="border-bottom: 1px solid black;">Date</td>
+			</tr>
+			<template is="dom-repeat" items="[[workouts]]" as="workout" filter="{{isYou(userName,'Stretching')}}">
+				<tr>
+					<td>[[workout.name]]</td>
+					<td>[[workout.amount]]</td>
+					<td>[[workout.recordedOn]]</td>
+				</tr>
+			</template>
+		</table>
+		<br>
+
+		<h3><iframe src="https://giphy.com/embed/3ov9k5yMLJ3r1R3YYM" width="45" height="60" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> Squats</h3>
+		<table>
+			<tr>
+				<td style="border-bottom: 1px solid black;"><b>&middotName&middot</b></td>
+				<td style="border-bottom: 1px solid black;">Amount</td>
+				<td style="border-bottom: 1px solid black;">Date</td>
+			</tr>
+			<template is="dom-repeat" items="[[workouts]]" as="workout" filter="{{isYou(userName,'Squats')}}">
+				<tr>
+					<td>[[workout.name]]</td>
+					<td>[[workout.amount]]</td>
+					<td>[[workout.recordedOn]]</td>
+				</tr>
+			</template>
+		</table>
+		<br>
+
+		<h3><iframe src="https://giphy.com/embed/l378Ayf6F6MjFqSUU" width="45" height="60" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> Situps</h3>
+		<table>
+			<tr>
+				<td style="border-bottom: 1px solid black;"><b>&middotName&middot</b></td>
+				<td style="border-bottom: 1px solid black;">Amount</td>
+				<td style="border-bottom: 1px solid black;">Date</td>
+			</tr>
+			<template is="dom-repeat" items="[[workouts]]" as="workout" filter="{{isYou(userName,'Situps')}}">
+				<tr>
+					<td>[[workout.name]]</td>
+					<td>[[workout.amount]]</td>
+					<td>[[workout.recordedOn]]</td>
+				</tr>
+			</template>
+		</table>
+		<br>
+
+		<h3><iframe src="https://giphy.com/embed/3ov9jQk1bEpgqNidFu" width="45" height="60" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> Around ImageTrend Laps</h3>
+		<table>
+			<tr>
+				<td style="border-bottom: 1px solid black;"><b>&middotName</td>
+				<td style="border-bottom: 1px solid black;">Amount</td>
+				<td style="border-bottom: 1px solid black;">Date&middot</b></td>
+			</tr>
+			<template is="dom-repeat" items="[[workouts]]" as="workout" filter="{{isYou(userName,'Running')}}">
+				<tr>
+					<td>[[workout.name]]</td>
+					<td>[[workout.amount]]</td>
+					<td>[[workout.recordedOn]]</td>
+				</tr>
+			</template>
+		</table>
+		<br>
+		<br>
+
+		<h3>Go Back</h3>
+		<paper-button on-click="handleClick">Back</paper-button>
+  </template>
+
+  <script>
+    class ItwMaineveryonesstats extends Polymer.Element {
+			static get is() { return 'itw-maineveryonesstats'; }
+
+      static get properties() {
+        return {
+          workouts: {
+            type: Object,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          },
+          userName: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+          },
+          mainPage: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+					}
+        };
+      }
+
+			isYou(name,type) {
+				return function(workout) {
+					return type == workout.workout;
+				};
+			}
+
+			remove(e, c) {
+				var key = e.currentTarget.workout.$key;
+				this.$.query.ref.child(key).remove();
+			}
+
+      handleClick() {
+				this.mainPage = 'maindefault';
+      }
+		}
+
+    window.customElements.define(ItwMaineveryonesstats.is, ItwMaineveryonesstats);
+  </script>
+</dom-module>
+

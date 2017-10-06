@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="lazy-import" href="itw-maindefault.html">
+<link rel="lazy-import" href="itw-maineveryonesstats.html">
+<link rel="lazy-import" href="itw-mainrecordworkout.html">
+<link rel="lazy-import" href="itw-mainyourstats.html">
+
+<dom-module id="itw-main">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+		</style>
+
+		<iron-pages
+				selected="[[mainPage]]"
+				attr-for-selected="name"
+				role="default">
+			<itw-maindefault name="maindefault" user-name="{{userName}}" main-page="{{mainPage}}"></itw-maindefault>
+			<itw-maineveryonesstats name="maineveryonesstats" user-name="{{userName}}" main-page="{{mainPage}}"></itw-maineveryonesstats>
+			<itw-mainrecordworkout name="mainrecordworkout" user-name="{{userName}}" main-page="{{mainPage}}"></itw-mainrecordworkout>
+			<itw-mainyourstats name="mainyourstats" user-name="{{userName}}" main-page="{{mainPage}}"></itw-mainyourstats>
+		</iron-pages>
+  </template>
+
+  <script>
+    class ItwMain extends Polymer.Element {
+      static get is() { return 'itw-main'; }
+
+      static get properties() {
+        return {
+          userName: {
+            type: String,
+            reflectToAttribute: true,
+    				notify: true,
+						readOnly: false
+					},
+
+          mainPage: {
+            type: String,
+						reflectToAttribute: true,
+						value: 'maindefault',
+            observer: '_mainPageChanged'
+          }
+        };
+			}
+
+      _mainPageChanged(mainPage) {
+        var resolvedPageUrl = this.resolveUrl('itw-' + mainPage + '.html');
+        Polymer.importHref(
+            resolvedPageUrl,
+            null,
+            null,
+            true);
+      }
+    }
+
+    window.customElements.define(ItwMain.is, ItwMain);
+  </script>
+</dom-module>
